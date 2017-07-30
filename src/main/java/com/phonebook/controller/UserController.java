@@ -2,6 +2,7 @@ package com.phonebook.controller;
 
 import com.phonebook.model.User;
 import com.phonebook.model.dto.UserCreationDto;
+import com.phonebook.model.dto.UserUpdateDto;
 import com.phonebook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<User> update(@PathVariable("id") String id, @RequestBody User user) {
-        User savedUser = userService.update(id, user);
+    public ResponseEntity<User> update(@PathVariable("id") String id, @RequestBody UserUpdateDto updateData) {
+        User savedUser = userService.update(id, updateData);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }
 }

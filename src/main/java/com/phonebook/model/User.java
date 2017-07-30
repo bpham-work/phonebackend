@@ -2,6 +2,7 @@ package com.phonebook.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.phonebook.exception.InvalidUserException;
+import com.phonebook.model.dto.UserUpdateDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,8 +43,8 @@ public class User {
         isFirstTimeLogin = false;
     }
 
-    public User updateWith(User user) {
-        return new User(id, phoneNumber, user.getName(), isFirstTimeLogin, user.getContacts(), password);
+    public User updateWith(UserUpdateDto updateData) {
+        return new User(id, phoneNumber, updateData.getName(), isFirstTimeLogin, updateData.getContacts(), password);
     }
 
     private void validateContacts() {
