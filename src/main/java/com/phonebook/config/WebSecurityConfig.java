@@ -25,6 +25,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .antMatchers(
+                    "/swagger-ui.html",
+                    "/swagger-ui.html/**",
+                    "/swagger-resources/**",
+                    "/*.css",
+                    "/*.js",
+                    "/v2/api-docs",
+                    "/webjars/springfox-swagger-ui/**").permitAll()
             .antMatchers(HttpMethod.POST, "/api/user").permitAll()
             .antMatchers(HttpMethod.GET, "/api/user").authenticated()
             .antMatchers(HttpMethod.PUT, "/api/user").authenticated()
