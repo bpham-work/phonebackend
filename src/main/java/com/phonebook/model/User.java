@@ -1,10 +1,12 @@
 package com.phonebook.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.phonebook.exception.InvalidUserException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +17,17 @@ public class User {
     private String phoneNumber;
     private String name;
     private boolean isFirstTimeLogin;
-    private List<Contact> contacts;
+    private List<Contact> contacts = new ArrayList<>();
+
+    @JsonIgnore
+    private String password;
+
+    public User(String phoneNumber, String name, String password) {
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.password = password;
+        this.isFirstTimeLogin = true;
+    }
 
     public void validate() {
         validatePhoneNumber();
@@ -31,7 +43,7 @@ public class User {
     }
 
     public User updateWith(User user) {
-        return new User(id, phoneNumber, user.getName(), isFirstTimeLogin, user.getContacts());
+        return new User(id, phoneNumber, user.getName(), isFirstTimeLogin, user.getContacts(), password);
     }
 
     private void validateContacts() {

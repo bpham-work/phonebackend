@@ -1,6 +1,7 @@
 package com.phonebook.controller;
 
 import com.phonebook.model.User;
+import com.phonebook.model.dto.UserCreationDto;
 import com.phonebook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -19,7 +21,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public ResponseEntity<User> create(@RequestBody User user) {
+    public ResponseEntity<User> create(@RequestBody UserCreationDto user) {
         User createdUser = userService.create(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
